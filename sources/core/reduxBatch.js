@@ -50,13 +50,19 @@ export function reduxBatch(next) {
 
         let store = next(... args);
 
-        function dispatch(action) {
+        function dispatchRecurse(action) {
 
-            let result = isArray(action)
-                ? action.map(subAction => dispatch(subAction))
+            return isArray(action)
+                ? action.map(subAction => dispatchRecurse(subAction))
                 : store.dispatch(action);
 
+        }
+
+        function dispatch(action) {
+
+            let result = dispatchRecurse(action);
             notifyListeners();
+
             return result;
 
         }
