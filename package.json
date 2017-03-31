@@ -6,9 +6,6 @@
     "build": "babel -d build/ sources/",
     "prepare": "npm run build"
   },
-  "dependencies": {
-    "lodash": "^4.15.0"
-  },
   "devDependencies": {
     "babel-cli": "^6.11.4",
     "babel-core": "^6.13.2",

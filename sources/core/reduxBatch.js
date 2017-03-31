@@ -1,4 +1,8 @@
-import { isArray, isFunction } from 'lodash';
+const isArray = Array.isArray;
+
+function isFunction(item){
+    return typeof item === "function";
+}
 
 export function reduxBatch(next) {
 
