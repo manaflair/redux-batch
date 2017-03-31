@@ -29,6 +29,8 @@ export function reduxBatch(next) {
             ensureCanMutateNextListeners();
             nextListeners.splice(nextListeners.indexOf(listener), 1);
 
+            isSubscribed = false;
+
         };
 
     }
