@@ -1,5 +1,3 @@
-import { isArray, isFunction } from 'lodash';
-
 export function reduxBatch(next) {
 
     let nextListeners = [];
@@ -15,7 +13,7 @@ export function reduxBatch(next) {
 
     function subscribe(listener) {
 
-        if (!isFunction(listener))
+        if (typeof listener !== `function`)
             throw new Error(`Invalid listener, expected a function`);
 
         let isSubscribed = true;
@@ -52,7 +50,7 @@ export function reduxBatch(next) {
 
         function dispatchRecurse(action) {
 
-            return isArray(action)
+            return Array.isArray(action)
                 ? action.map(subAction => dispatchRecurse(subAction))
                 : store.dispatch(action);
 
