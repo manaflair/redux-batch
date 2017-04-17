@@ -50,6 +50,9 @@ export function reduxBatch(next) {
 
         let store = next(... args);
 
+        let receivedNotification = false;
+        let inDispatch = false;
+
         function dispatchRecurse(action) {
 
             return Array.isArray(action)
@@ -60,12 +63,37 @@ export function reduxBatch(next) {
 
         function dispatch(action) {
 
+            let reentrant = inDispatch;
+
+            if (!reentrant) {
+                receivedNotification = false;
+                inDispatch = true;
+            }
+
             let result = dispatchRecurse(action);
-            notifyListeners();
+            let requiresNotification = receivedNotification && !reentrant;
+
+            if (!reentrant) {
+                receivedNotification = false;
+                inDispatch = false;
+            }
+
+            if (requiresNotification)
+                notifyListeners();
 
             return result;
 
         }
+
+        store.subscribe(() => {
+
+            if (inDispatch) {
+                receivedNotification = true;
+            } else {
+                notifyListeners();
+            }
+
+        });
 
         return Object.assign({}, store, {
             dispatch, subscribe
