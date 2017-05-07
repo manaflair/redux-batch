@@ -1,7 +1,7 @@
 export function reduxBatch(next) {
 
     let nextListeners = [];
-    let currentListeners = currentListeners;
+    let currentListeners = undefined;
 
     function ensureCanMutateNextListeners() {
 
