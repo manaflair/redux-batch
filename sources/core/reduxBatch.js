@@ -53,7 +53,7 @@ export function reduxBatch(next) {
         let receivedNotification = false;
         let inDispatch = false;
 
-        function dispatchRecurse(action) {
+        var dispatchRecurse = function(action) {
 
             return Array.isArray(action)
                 ? action.map(subAction => dispatchRecurse(subAction))
