@@ -49,8 +49,10 @@ sagaMiddleware.run(function* () {
     // listeners will only be fired after both actions have
     // been resolved/
 
-    yield put([ action, action ]);
-
+    yield [
+      put(action),
+      put(action),
+    ]
   });
 });
 ```
