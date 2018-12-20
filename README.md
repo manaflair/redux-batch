@@ -35,7 +35,7 @@ store.dispatch([
 
 ```js
 import { reduxBatch }                            from '@manaflair/redux-batch';
-import { put, takeEvery }                        from 'redux-saga/effects';
+import { all, put, takeEvery }                        from 'redux-saga/effects';
 import createSagaMiddleware                      from 'redux-saga';
 import { applyMiddleware, compose, createStore } from 'redux';
 
@@ -49,10 +49,10 @@ sagaMiddleware.run(function* () {
     // listeners will only be fired after both actions have
     // been resolved/
 
-    yield [
+    yield all([
       put(action),
       put(action),
-    ]
+    ])
   });
 });
 ```
