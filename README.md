@@ -35,7 +35,7 @@ store.dispatch([
 
 ```js
 import { reduxBatch }                            from '@manaflair/redux-batch';
-import { all, put, takeEvery }                        from 'redux-saga/effects';
+import { all, put, takeEvery }                   from 'redux-saga/effects';
 import createSagaMiddleware                      from 'redux-saga';
 import { applyMiddleware, compose, createStore } from 'redux';
 
