@@ -33,6 +33,8 @@ store.dispatch([
 
 ## Usage w/ extra middlewares
 
+> **Note:** Since this package got written, redux-saga improved and using `all([ put(...), put(...) ])` seems to properly batch the two actions into a single subscription event, making redux-batch redundant in this scenario.
+
 ```js
 import { reduxBatch }                            from '@manaflair/redux-batch';
 import { put, takeEvery }                        from 'redux-saga/effects';
