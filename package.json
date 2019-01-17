@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "build": "babel -d build/ sources/",
-    "prepare": "npm run build"
+    "prepare": "yarn run build"
   },
   "devDependencies": {
     "babel-cli": "^6.11.4",
