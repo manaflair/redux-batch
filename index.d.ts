@@ -1,7 +1,9 @@
 declare module "@manaflair/redux-batch" {
-  import { AnyAction, StoreEnhancer } from "redux";
+  import { Action, AnyAction, StoreEnhancer } from "redux";
 
-  export const reduxBatch: StoreEnhancer<{
-    dispatch: (actions: AnyAction[]) => AnyAction[],
+  export type BatchEnhancer<A extends Action = AnyAction> = StoreEnhancer<{
+    dispatch: (actions: A[]) => A[];
   }>;
+
+  export const reduxBatch: BatchEnhancer;
 }
