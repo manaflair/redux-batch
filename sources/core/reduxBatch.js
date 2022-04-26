@@ -70,7 +70,16 @@ export function reduxBatch(next) {
                 inDispatch = true;
             }
 
-            let result = dispatchRecurse(action);
+            let hasError = false;
+            let error = undefined;
+            let result = undefined;
+            try {
+                result = dispatchRecurse(action);
+            } catch (e) {
+                hasError = true;
+                error = e;
+            }
+
             let requiresNotification = receivedNotification && !reentrant;
 
             if (!reentrant) {
@@ -81,8 +90,10 @@ export function reduxBatch(next) {
             if (requiresNotification)
                 notifyListeners();
 
+            if (hasError) {
+                throw error;
+            }
             return result;
-
         }
 
         store.subscribe(() => {
